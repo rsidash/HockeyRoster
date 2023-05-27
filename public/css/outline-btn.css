@@ -1,0 +1,10 @@
+.btn-outline-secondary {
+    --bs-btn-hover-color: none;
+    --bs-btn-hover-bg: none;
+    --bs-btn-hover-border-color: #212529;
+
+    --bs-btn-active-color: #none;
+    --bs-btn-active-bg: #none;
+    --bs-btn-active-border-color: #none;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
