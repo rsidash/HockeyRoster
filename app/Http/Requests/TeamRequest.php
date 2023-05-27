@@ -24,9 +24,9 @@ class TeamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:50|min:3',
+            'name' => 'required|string|max:25|min:3',
             'description' => 'nullable|string|max:500',
-//            'owner_id' => 'required|numeric|exists:users,id',
+            'owner_id' => 'required|numeric|exists:users,id',
         ];
     }
 }

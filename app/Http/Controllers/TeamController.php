@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Team;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -42,13 +45,20 @@ class TeamController extends Controller
      */
     public function store(TeamRequest $request)
     {
-        Team::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'owner_id' => 1, // тут должен быть id текущего юзера
-        ]);
+        try {
+            $team = Team::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'owner_id' => Auth::id(),
+            ]);
 
-        return redirect('/teams');
+            return redirect()->route('teams.show', [$team]);
+        } catch (QueryException $exception) {
+            return redirect()->route('teams.index')->withErrors(['error' => 'Не удалось создать команду']);
+        } catch (Exception $exception) {
+            return redirect()->route('teams.index')->withErrors(['error' => $exception->getMessage()]);
+        }
+
     }
 
     /**
