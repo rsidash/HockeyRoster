@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\MainController;
@@ -54,3 +55,6 @@ Route::middleware('auth')->group(function () {
         'create', 'store',
     ]);
 });
+
+Route::get('/auth/google/redirect', [ProviderController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [ProviderController::class, 'callback'])->name('google.callback');

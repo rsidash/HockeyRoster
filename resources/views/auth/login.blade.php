@@ -2,6 +2,27 @@
 
 @section('css')
     <link href={{ URL::asset('/css/signin.css') }} rel="stylesheet">
+
+    <style>
+        .or-container {
+            align-items: center;
+
+            display: flex;
+            margin: 25px 0;
+        }
+
+        .line-separator {
+            background-color: #ccc;
+            flex-grow: 5;
+            height: 1px;
+        }
+
+        .or-label {
+            flex-grow: 1;
+            margin: 0 15px;
+            text-align: center;
+        }
+    </style>
 @endsection
 
 @section('body')
@@ -16,9 +37,9 @@
             <h1 class="h3 mb-3 fw-normal user-select-none">{{ __('login.title') }}</h1>
 
             @if(session('status'))
-            <div class="alert alert-success my-2">
-                {{ session('status') }}
-            </div>
+                <div class="alert alert-success my-2">
+                    {{ session('status') }}
+                </div>
             @endif
 
             @error('failedLogin')
@@ -33,17 +54,17 @@
                 </div>
             @endif
 
-{{--            @error('login')--}}
-{{--                <div class="alert alert-danger my-2" role="alert">--}}
-{{--                    {{ __('validation.loginError.login_not_filled') }}--}}
-{{--                </div>--}}
-{{--            @enderror--}}
+            {{--            @error('login')--}}
+            {{--                <div class="alert alert-danger my-2" role="alert">--}}
+            {{--                    {{ __('validation.loginError.login_not_filled') }}--}}
+            {{--                </div>--}}
+            {{--            @enderror--}}
 
-{{--            @error('password')--}}
-{{--                <div class="alert alert-danger my-2" role="alert">--}}
-{{--                    {{ __('validation.loginError.password_not_filled') }}--}}
-{{--                </div>--}}
-{{--            @enderror--}}
+            {{--            @error('password')--}}
+            {{--                <div class="alert alert-danger my-2" role="alert">--}}
+            {{--                    {{ __('validation.loginError.password_not_filled') }}--}}
+            {{--                </div>--}}
+            {{--            @enderror--}}
 
             <div class="form-floating user-select-none">
                 <input type="text"
@@ -68,9 +89,9 @@
                     </label>
                 </div>
                 <div class="label label-default col">
-{{--                    @if (Route::has('password.request'))--}}
-                        <a href="{{ route('password.request') }}">{{ __('login.forgotPassword') }}</a>
-{{--                    @endif--}}
+                    {{--                    @if (Route::has('password.request'))--}}
+                    <a href="{{ route('password.request') }}">{{ __('login.forgotPassword') }}</a>
+                    {{--                    @endif--}}
                 </div>
             </div>
 
@@ -78,7 +99,25 @@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">{{ __('header.user.logIn') }}</button>
                 <a class="w-100 btn btn-link" href="{{ route('register.create') }}">{{ __('header.user.signUp') }}</a>
             </div>
+
         </form>
+
+        <div>
+            <div class="or-container">
+                <div class="line-separator"></div>
+                <div class="or-label text-uppercase">ИЛИ</div>
+                <div class="line-separator"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="" href="{{ route('google.redirect') }}">
+                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Войти через Google
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
     </body>
 @endsection
