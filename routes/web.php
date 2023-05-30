@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -19,16 +22,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('guest_or_verified')->group(function () {
+    Route::get('/', [MainController::class, 'index'])->name('main');
 
-Route::get('/', [MainController::class, 'index'])->name('main');
+    Route::resource('teams', TeamController::class)->only([
+        'index', 'show', 'create', 'store',
+    ]);
 
-Route::resource('teams', TeamController::class)->only([
-    'index', 'show', 'create', 'store',
-]);
-
-Route::resource('players', TeamController::class)->only([
-    'index', 'show', 'create', 'store',
-]);
+    Route::resource('players', TeamController::class)->only([
+        'index', 'show', 'create', 'store',
+    ]);
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('auth.create');
@@ -42,19 +46,29 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
     Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');
+
+    Route::get('/auth/google/redirect', [ProviderController::class, 'redirect'])->name('google.redirect');
+    Route::get('/auth/google/callback', [ProviderController::class, 'callback'])->name('google.callback');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
+    Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
+        ->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+        ->middleware('signed')
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, '__invoke'])
+        ->name('verification.send');
+
     Route::resource('teams', TeamController::class)->only([
         'create', 'store',
-    ]);
+    ])->middleware('verified');
 
     Route::resource('players', TeamController::class)->only([
         'create', 'store',
     ]);
 });
-
-Route::get('/auth/google/redirect', [ProviderController::class, 'redirect'])->name('google.redirect');
-Route::get('/auth/google/callback', [ProviderController::class, 'callback'])->name('google.callback');

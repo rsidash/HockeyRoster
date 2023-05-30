@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,10 +34,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-//        event(new Registered($user));
+        event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('verification.notice')->with('status', 'Письмо с подтверждением регистрации отправлено на указанную Вами почту');
     }
 }

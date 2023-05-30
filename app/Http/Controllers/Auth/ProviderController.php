@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
@@ -28,6 +28,11 @@ class ProviderController extends Controller
         ]);
 
         Auth::login($user);
+
+        if (!$user->hasVerifiedEmail()) {
+            event(new Registered($user));
+            return redirect()->route('verification.notice')->with('status', 'Письмо с подтверждением регистрации отправлено на указанную Вами почту');
+        }
 
         return redirect('/');
     }
