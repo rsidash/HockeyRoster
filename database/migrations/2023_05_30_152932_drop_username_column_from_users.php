@@ -23,7 +23,7 @@ return new class extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */git
+     */
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
