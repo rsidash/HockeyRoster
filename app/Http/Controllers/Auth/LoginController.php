@@ -18,11 +18,7 @@ class LoginController extends Controller
     {
         $remember = $request->has('remember') ? true : false;
 
-        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-        $credentials = $fieldType === 'email' ?
-            ['email' => $request->login, 'password' => $request->password]:
-            ['username' => $request->login, 'password' => $request->password];
+        $credentials = ['email' => $request->email, 'password' => $request->password];
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();

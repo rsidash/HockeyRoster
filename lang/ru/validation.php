@@ -123,10 +123,8 @@ return [
     'uuid' => 'The :attribute must be a valid UUID.',
 
     'loginError' => [
-        'fail' => 'Неверные данные для входа',
-        'login_not_filled' => 'Заполните имя пользователя или email',
-        'password_not_filled' => 'Заполните пароль',
-        'login_password_not_filled' => 'Не заполнены данные для входа',
+        'data_not_correct' => 'Некорректные данные для входа',
+        'email_password_not_correct' => 'Неверные имя пользователя или пароль',
         ],
 
     'usernameUnique' => 'Такой пользователь уже существует.',

@@ -25,9 +25,6 @@ class ProviderController extends Controller
         ], [
             'password' => bcrypt(Str::random(16)),
             'google_token' => $googleUser->token,
-            'username' => $googleUser->getNickname() ?
-                $googleUser->getNickname() :
-                strstr($googleUser->getEmail(),'@',true),
         ]);
 
         Auth::login($user);

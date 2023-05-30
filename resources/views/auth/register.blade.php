@@ -45,25 +45,25 @@
                 @enderror
             </div>
 
-            <div class="col-sm-6">
-                <label for="username" class="form-label">Имя пользователя</label>
-                <div class="input-group">
-                    <span class="input-group-text">@</span>
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
-                           name="username" placeholder="username" value="{{ old('username') }}">
-                </div>
-                <div id="usernameHelp" class="form-text">Имя пользователя может содержать только строчные буквы
-                    латинского алфавита (a–z), цифры
-                    (0-9), символ '_' и должно быть длиной от 2 до 20 символов
-                </div>
-                @error('username')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
+{{--            <div class="col-sm-6">--}}
+{{--                <label for="username" class="form-label">Имя пользователя</label>--}}
+{{--                <div class="input-group">--}}
+{{--                    <span class="input-group-text">@</span>--}}
+{{--                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"--}}
+{{--                           name="username" placeholder="username" value="{{ old('username') }}">--}}
+{{--                </div>--}}
+{{--                <div id="usernameHelp" class="form-text">Имя пользователя может содержать только строчные буквы--}}
+{{--                    латинского алфавита (a–z), цифры--}}
+{{--                    (0-9), символ '_' и должно быть длиной от 2 до 20 символов--}}
+{{--                </div>--}}
+{{--                @error('username')--}}
+{{--                <div class="alert alert-danger mt-1" role="alert">--}}
+{{--                    {{ $message }}--}}
+{{--                </div>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
 
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                        name="email" placeholder="you@example.com" value="{{ old('email') }}">

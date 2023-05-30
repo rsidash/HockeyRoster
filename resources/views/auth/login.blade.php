@@ -44,38 +44,32 @@
 
             @error('failedLogin')
             <div class="alert alert-danger my-2">
-                {{ __('validation.loginError.fail') }}
+                {{ __('validation.loginError.email_password_not_correct') }}
             </div>
             @enderror
 
-            @if($errors->has('login') || $errors->has('password'))
-                <div class="alert alert-danger my-2" role="alert">
-                    {{ __('validation.loginError.login_password_not_filled') }}
+            @if ($errors->has('email') || $errors->has('password'))
+                <div class="alert alert-danger my-2">
+                    {{ __('validation.loginError.data_not_correct') }}
                 </div>
             @endif
 
-            {{--            @error('login')--}}
-            {{--                <div class="alert alert-danger my-2" role="alert">--}}
-            {{--                    {{ __('validation.loginError.login_not_filled') }}--}}
-            {{--                </div>--}}
-            {{--            @enderror--}}
-
-            {{--            @error('password')--}}
-            {{--                <div class="alert alert-danger my-2" role="alert">--}}
-            {{--                    {{ __('validation.loginError.password_not_filled') }}--}}
-            {{--                </div>--}}
-            {{--            @enderror--}}
+{{--            @if($errors->has('email') || $errors->has('password'))--}}
+{{--                <div class="alert alert-danger my-2" role="alert">--}}
+{{--                    {{ __('validation.loginError.email_password_not_filled') }}--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
             <div class="form-floating user-select-none">
                 <input type="text"
-                       class="form-control @error('login') is-invalid @enderror"
-                       id="floatingInput" placeholder="Имя пользльзователя или Email"
-                       name="login" value="{{ old('login') }}">
-                <label for="floatingInput" class="user-select-none text-secondary">Имя пользльзователя или Email</label>
+                       class="form-control @if ($errors->any()) is-invalid @endif"
+                       id="floatingInput" placeholder="Email"
+                       name="email" value="{{ old('email') }}">
+                <label for="floatingInput" class="user-select-none text-secondary">Email</label>
             </div>
             <div class="form-floating mt-2 user-select-none">
                 <input type="password"
-                       class="form-control @error('password') is-invalid @enderror"
+                       class="form-control @if ($errors->any()) is-invalid @endif"
                        id="floatingPassword" placeholder="{{ __('login.password') }}"
                        name="password">
                 <label for="floatingPassword" class="user-select-none text-secondary">{{ __('login.password') }}</label>
@@ -112,7 +106,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <a class="" href="{{ route('google.redirect') }}">
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Войти через Google
+                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Войти через
+                        Google
                     </a>
                 </div>
             </div>

@@ -45,7 +45,7 @@
                             @if (isset(Auth::user()->avatar_path))
                                 <img
                                     src="{{ Storage::url(Auth::user()->avatar_path) }}"
-                                    alt="{{ Auth::user()->username }}" width="32" height="32"
+                                    alt="{{ Auth::user()->email }}" width="32" height="32"
                                     class="rounded-circle">
                             @else
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
@@ -56,7 +56,7 @@
                                 </svg>
                             @endif
                             <span
-                                class="d-none d-md-inline-flex align-items-center fw-bold me-1 p-2">{{ Auth::user()->username }}</span>
+                                class="d-none d-md-inline-flex align-items-center fw-bold me-1 p-2">{{ Auth::user()->email }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end text-small shadow"
                             aria-labelledby="dropdownUser">
@@ -122,7 +122,7 @@
                                            class="link-secondary text-decoration-none d-flex align-items-center"
                                            id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span
-                                            class="d-flex align-items-center fw-bold mx-2">{{ Auth::user()->username }}</span>
+                                            class="d-flex align-items-center fw-bold mx-2">{{ Auth::user()->email }}</span>
                                             @if (isset(Auth::user()->avatar_path))
                                                 <img
                                                     src="{{ Storage::url(Auth::user()->avatar_path) }}"
