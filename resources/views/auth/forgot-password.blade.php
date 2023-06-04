@@ -29,8 +29,14 @@
             </div>
             @enderror
 
+            @error('password_reset_failed')
+            <div class="alert alert-danger my-2" role="alert">
+                Ошибка. Повторите процедуру восстановления пароля
+            </div>
+            @enderror
+
             <div class="form-floating user-select-none my-2">
-                <input type="text"
+                <input type="email"
                        class="form-control rounded @error('email') is-invalid @enderror"
                        id="floatingInput" placeholder="E-mail"
                        name="email" value="{{ old('email') }}">

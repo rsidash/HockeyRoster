@@ -32,12 +32,12 @@ class UserRequest extends FormRequest
 //            'country' => 'required|string', // should exists: exists:countries
 //            'city' => 'required|string', // should exists: exists:cities
 
-            'birthdate' => 'nullable|date',
-            'fileToUpload' => 'nullable|mimes:jpg,png,jpeg',
-            'hand' => 'nullable|string',
-            'jerseyNumber' => 'nullable|string|max:2', // regex
-            'height' => 'nullable|digits_between:2,3',
-            'weight' => 'nullable|digits_between:2,3',
+//            'birthdate' => 'nullable|date',
+//            'fileToUpload' => 'nullable|mimes:jpg,png,jpeg',
+//            'hand' => 'nullable|string',
+//            'jerseyNumber' => 'nullable|string|max:2', // regex
+//            'height' => 'nullable|digits_between:2,3',
+//            'weight' => 'nullable|digits_between:2,3',
 //            'phone' => 'nullable|string', // regex
         ];
     }

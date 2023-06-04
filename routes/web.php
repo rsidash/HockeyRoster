@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware('guest_or_verified')->group(function () {
+//Route::middleware('guest_or_verified')->group(function () {
     Route::get('/', [MainController::class, 'index'])->name('main');
 
     Route::resource('teams', TeamController::class)->only([
@@ -32,7 +32,7 @@ Route::middleware('guest_or_verified')->group(function () {
     Route::resource('players', TeamController::class)->only([
         'index', 'show', 'create', 'store',
     ]);
-});
+//});
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('auth.create');

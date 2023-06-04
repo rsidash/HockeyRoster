@@ -8,6 +8,24 @@
         form i {
             cursor: pointer;
         }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .show-hide-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 2; /* Adjust the z-index to make the icon appear above the input field */
+        }
+
+        .input-group input.form-control {
+            padding-right: 40px; /* Adjust the padding to make space for the icon */
+            z-index: 1; /* Set a lower z-index to make the input field appear below the icon */
+        }
     </style>
 @endsection
 
@@ -30,19 +48,15 @@
                                                             width="72" height="57" alt="{ __('header.goToHomepage') }}"></a>
             <h1 class="h3 mb-3 fw-normal user-select-none">Смена пароля</h1>
 
-            @error('email')
-            <div class="alert alert-danger my-2" role="alert">
-                {{ $message }}
-            </div>
-            @enderror
+            @if ($errors->any())
+                @unless ($errors->has('password'))
+                    <div class="alert alert-danger my-2" role="alert">
+                        Ошибка. Повторите процедуру восстановления пароля
+                    </div>
+                @endunless
+            @endif
 
             @error('password')
-            <div class="alert alert-danger my-2" role="alert">
-                {{ $message }}
-            </div>
-            @enderror
-
-            @error('password-confirmation')
             <div class="alert alert-danger my-2" role="alert">
                 {{ $message }}
             </div>
@@ -56,28 +70,32 @@
             {{--                <label for="floatingInput" class="user-select-none text-secondary">E-mail</label>--}}
             {{--            </div>--}}
 
-            <div class="input-group my-2">
+            <div class="input-group my-2 user-select-none">
                 <div class="form-floating">
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                           id="password" placeholder="Пароль"
-                           style="margin-bottom: 0; border-top-left-radius: 5px;">
+                    <input type="password" name="password"
+                           class="rounded form-control @error('password') is-invalid @enderror"
+                           id="password" placeholder="Пароль" style="margin-bottom: 0;">
                     <label class="user-select-none text-secondary" for="password">Пароль</label>
                 </div>
-                <i id="showHidePassword" class="link-underline link-underline-opacity-0 input-group-text bi bi-eye"
-                   onclick="showHidePassword()"></i>
+                <div class="input-group-append">
+                    <span class="input-group-text show-hide-icon bg-body border-0 p-0" onclick="showHidePassword()">
+                        <i id="showHidePasswordIcon" class="bi bi-eye"></i>
+                    </span>
+                </div>
             </div>
 
-            <div class="input-group my-2">
+            <div class="input-group my-2 user-select-none">
                 <div class="form-floating">
                     <input type="password" name="password_confirmation"
-                           class="form-control @error('password') is-invalid @enderror" id="password_confirmation"
-                           placeholder="Подтвердите пароль"
-                           style="margin-bottom: 0; border-top-left-radius: 5px;">
-                    <label class="user-select-none text-secondary" for="password">Подтвердите пароль</label>
+                           class="rounded form-control @error('password') is-invalid @enderror"
+                           id="password_confirmation" placeholder="Подтвердите пароль" style="margin-bottom: 0;">
+                    <label class="user-select-none text-secondary" for="password_confirmation">Подтвердите пароль</label>
                 </div>
-                <i id="showHideConfirmedPassword"
-                   class="link-underline link-underline-opacity-0 input-group-text bi bi-eye"
-                   onclick="showHidePassword()"></i>
+                <div class="input-group-append">
+                    <span class="input-group-text show-hide-icon bg-body border-0 p-0" onclick="showHidePassword()">
+                        <i id="showHideConfirmedPasswordIcon" class="bi bi-eye"></i>
+                    </span>
+                </div>
             </div>
 
             {{--            <div class="form-floating user-select-none my-2">--}}

@@ -54,14 +54,14 @@
                 </div>
             @endif
 
-{{--            @if($errors->has('email') || $errors->has('password'))--}}
-{{--                <div class="alert alert-danger my-2" role="alert">--}}
-{{--                    {{ __('validation.loginError.email_password_not_filled') }}--}}
-{{--                </div>--}}
-{{--            @endif--}}
+            {{--            @if($errors->has('email') || $errors->has('password'))--}}
+            {{--                <div class="alert alert-danger my-2" role="alert">--}}
+            {{--                    {{ __('validation.loginError.email_password_not_filled') }}--}}
+            {{--                </div>--}}
+            {{--            @endif--}}
 
             <div class="form-floating user-select-none">
-                <input type="text"
+                <input type="email"
                        class="form-control @if ($errors->any()) is-invalid @endif"
                        id="floatingInput" placeholder="Email"
                        name="email" value="{{ old('email') }}">
@@ -84,14 +84,14 @@
                 </div>
                 <div class="label label-default col">
                     {{--                    @if (Route::has('password.request'))--}}
-                    <a href="{{ route('password.request') }}">{{ __('login.forgotPassword') }}</a>
+                    <a class="link-underline link-underline-opacity-0" href="{{ route('password.request') }}">{{ __('login.forgotPassword') }}</a>
                     {{--                    @endif--}}
                 </div>
             </div>
 
             <div class="d-grid gap-2">
                 <button class="w-100 btn btn-lg btn-primary" type="submit">{{ __('header.user.logIn') }}</button>
-                <a class="w-100 btn btn-link" href="{{ route('register.create') }}">{{ __('header.user.signUp') }}</a>
+                <a class="w-100 btn btn-link link-underline link-underline-opacity-0" href="{{ route('register.create') }}">{{ __('header.user.signUp') }}</a>
             </div>
 
         </form>
@@ -105,7 +105,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <a class="" href="{{ route('google.redirect') }}">
+                    <a class="link-underline link-underline-opacity-0" href="{{ route('google.redirect') }}">
                         <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Войти через
                         Google
                     </a>

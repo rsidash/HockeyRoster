@@ -1,27 +1,105 @@
-@extends('master')
+@extends('layouts.html-head')
 
 @section('css')
+    <link href={{ URL::asset('/css/signin.css') }} rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <style>
+        .or-container {
+            align-items: center;
+
+            display: flex;
+            margin: 25px 0;
+        }
+
+        .line-separator {
+            background-color: #ccc;
+            flex-grow: 5;
+            height: 1px;
+        }
+
+        .or-label {
+            flex-grow: 1;
+            margin: 0 15px;
+            text-align: center;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .show-hide-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 2; /* Adjust the z-index to make the icon appear above the input field */
+        }
+
+        .input-group input.form-control {
+            padding-right: 40px; /* Adjust the padding to make space for the icon */
+            z-index: 1; /* Set a lower z-index to make the input field appear below the icon */
+        }
+    </style>
 @endsection
 
 @section('scripts')
     <script src={{ URL::asset('/js/showHidePassword.js') }} crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#firstName').focus(function () {
+                $('#firstNameHelp').show();
+            }).blur(function () {
+                $('#firstNameHelp').hide();
+            });
 
-    <!-- JQUERY JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+            $('#lastName').focus(function () {
+                $('#lastNameHelp').show();
+            }).blur(function () {
+                $('#lastNameHelp').hide();
+            });
+
+            $('#password').focus(function () {
+                $('#passwordHelp').show();
+            }).blur(function () {
+                $('#passwordHelp').hide();
+            });
+        });
+    </script>
 @endsection
 
-@section('content')
-    <h4 class="mb-3 mt-3">Регистрация нового пользователя</h4>
-    <form method="post" action="{{ route('register.store') }}" enctype="multipart/form-data">
-        @csrf
-        <div class="row g-3">
-            <div class="col-sm-6">
-                <label for="firstName" class="form-label">Имя</label>
-                <input type="text" class="form-control @error('firstName') is-invalid @enderror" id="firstName"
-                       name="firstName" placeholder="" value="{{ old('firstName') }}">
-                <div id="usernameHelp" class="form-text">Имя может содержать только буквы
+@section('body')
+    <body class="text-center">
+    <div class="form-signin">
+        <div class="mt-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="d-flex justify-content-center align-items-center link-underline link-underline-opacity-0"
+                       href="{{ route('google.redirect') }}">
+                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Зарегистрироваться
+                        с
+                        помощью Google
+                    </a>
+                </div>
+            </div>
+
+            <div class="or-container">
+                <div class="line-separator"></div>
+                <div class="or-label text-uppercase">ИЛИ</div>
+                <div class="line-separator"></div>
+            </div>
+        </div>
+
+        <form method="post" action="{{ route('register.store') }}">
+            @csrf
+            <div class="form-floating mt-2 user-select-none">
+                <input type="text" class="rounded form-control @error('firstName') is-invalid @enderror" id="firstName"
+                       name="firstName" placeholder="Имя" value="{{ old('firstName') }}" pattern="[A-Za-z]+">
+                <label for="firstName" class="user-select-none text-secondary">Имя</label>
+                <div id="firstNameHelp" class="form-text" style="display: none;">Имя может содержать только буквы
                     латинского алфавита (A–z)
                 </div>
                 @error('firstName')
@@ -31,11 +109,11 @@
                 @enderror
             </div>
 
-            <div class="col-sm-6">
-                <label for="lastName" class="form-label">Фамилия</label>
-                <input type="text" class="form-control @error('lastName') is-invalid @enderror" id="lastName"
-                       name="lastName" placeholder="" value="{{ old('lastName') }}">
-                <div id="usernameHelp" class="form-text">Фамилия может содержать только буквы
+            <div class="form-floating mt-2 user-select-none">
+                <input type="text" class="rounded form-control @error('lastName') is-invalid @enderror" id="lastName"
+                       name="lastName" placeholder="Фамилия" value="{{ old('lastName') }}">
+                <label for="lastName" class="user-select-none text-secondary">Фамилия</label>
+                <div id="lastNameHelp" class="form-text" style="display: none;">Фамилия может содержать только буквы
                     латинского алфавита (A–z)
                 </div>
                 @error('lastName')
@@ -45,28 +123,33 @@
                 @enderror
             </div>
 
-{{--            <div class="col-sm-6">--}}
-{{--                <label for="username" class="form-label">Имя пользователя</label>--}}
-{{--                <div class="input-group">--}}
-{{--                    <span class="input-group-text">@</span>--}}
-{{--                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"--}}
-{{--                           name="username" placeholder="username" value="{{ old('username') }}">--}}
-{{--                </div>--}}
-{{--                <div id="usernameHelp" class="form-text">Имя пользователя может содержать только строчные буквы--}}
-{{--                    латинского алфавита (a–z), цифры--}}
-{{--                    (0-9), символ '_' и должно быть длиной от 2 до 20 символов--}}
-{{--                </div>--}}
-{{--                @error('username')--}}
-{{--                <div class="alert alert-danger mt-1" role="alert">--}}
-{{--                    {{ $message }}--}}
-{{--                </div>--}}
-{{--                @enderror--}}
-{{--            </div>--}}
+            <script>
+                function restrictToAlphabetic(inputField) {
+                    inputField.addEventListener('keypress', function (event) {
+                        let keyCode = event.keyCode || event.which;
+                        let key = String.fromCharCode(keyCode);
 
-            <div class="col-sm-12">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                       name="email" placeholder="you@example.com" value="{{ old('email') }}">
+                        let regex = /[A-Za-z]/;
+
+                        if (!regex.test(key)) {
+                            event.preventDefault();
+                        }
+                    });
+                }
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    let firstNameInput = document.getElementById('firstName');
+                    let lastNameInput = document.getElementById('lastName');
+
+                    restrictToAlphabetic(firstNameInput);
+                    restrictToAlphabetic(lastNameInput);
+                });
+            </script>
+
+            <div class="form-floating mt-2 user-select-none">
+                <input type="email" class="rounded form-control @error('email') is-invalid @enderror" id="email"
+                       name="email" placeholder="Email" value="{{ old('email') }}">
+                <label for="email" class="user-select-none text-secondary">Email</label>
                 @error('email')
                 <div class="alert alert-danger mt-1" role="alert">
                     {{ $message }}
@@ -74,192 +157,53 @@
                 @enderror
             </div>
 
-            <div class="col-sm-6">
-                <label for="password" class="form-label">Пароль</label>
-                <div class="input-group">
+            <div class="input-group mt-2 user-select-none">
+                <div class="form-floating">
                     <input type="password" name="password"
-                           class="form-control @error('password') is-invalid @enderror"
-                           id="password">
-                    <a id="showHidePassword" class="link-underline link-underline-opacity-0 input-group-text bi bi-eye"
-                       onclick="showHidePassword()"></a>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="password_confirmation" class="form-label">Повторите пароль</label>
-                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                       id="password_confirmation" name="password_confirmation">
-            </div>
-
-            <div class="col-12">
-                @error('password')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-
-            <div class="col-md-6">
-                <label for="country" class="form-label">Страна</label>
-                <select class="form-select @if($errors->has('country') || $errors->has('city')) is-invalid @endif"
-                        id="country" name="country">
-                    <option value="">Выберите страну...</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-md-6">
-                <label for="city" class="form-label">Город</label>
-                <select class="form-select @error('city') is-invalid @enderror" id="city" name="city">
-                    <option value="">Выберите город...</option>
-                </select>
-                <input type="hidden" id="getCitiesByCountry" url="{{ url('get-cities-by-country-id') }}"
-                       token="{{ csrf_token() }}"/>
-                <script src="js/getCitiesByCountry.js"></script>
-            </div>
-
-            <div class="col-12">
-                @if(($errors->has('country') || $errors->has('city')) || (strlen(old('country')) > 0))
-                    <div class="alert alert-danger mt-1" role="alert">
-                        Необходимо выбрать страну и город
+                           class="rounded form-control @error('password') is-invalid @enderror"
+                           id="password" placeholder="Пароль" style="margin-bottom: 0;">
+                    <label class="user-select-none text-secondary" for="password">Пароль</label>
+                    <div id="passwordHelp" class="form-text" style="display: none;">Пароль должен содержать не менее 8
+                        символов
                     </div>
-                @endif
-            </div>
-
-            <div class="col-sm-2">
-                <label for="phoneCode" class="form-label">Код страны<span
-                        class="text-muted"> (Опционально)</span></label>
-                <input type="hidden" id="getPhoneCodeByCountry" url="{{ url('get-phone-code-by-country-id') }}"
-                       token="{{ csrf_token() }}"/>
-                <script src="js/getPhoneCodeByCountry.js"></script>
-                <select class="form-select" id="phoneCode" name="phoneCode">
-                    <option value="">Выберите код...</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->country_code }} {{ $country->phone_code }}"
-                                @if(old('phoneCode') == $country->country_code . ' ' . $country->phone_code)
-                                selected
-                            @endif>
-                            {{ $country->country_code }} {{ $country->phone_code }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="col-sm-10">
-                <label for="phone" class="form-label">Номер телефона<span
-                        class="text-muted"> (Опционально)</span></label>
-                <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone"
-                       placeholder="XXX XXX-XXXX"
-                       value="{{ old('phone') }}">
-                @error('phone')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
                 </div>
-                @enderror
-            </div>
-
-            <div class="col-12">
-                <label for="jerseyNumber" class="form-label">Предпочитаемый игровой номер<span class="text-muted"> (Опционально)</span></label>
-                <select class="form-select" id="jerseyNumber" name="jerseyNumber">
-                    <option value="">Выберите предпочитаемый игровой номер...</option>
-                    @for ($i = 1; $i < 100; $i++)
-                        <option value="{{ $i }}" @if(old('jerseyNumber') == $i) selected @endif>{{ $i }}</option>
-                    @endfor
-                </select>
-            </div>
-
-            <div class="col-12">
-                <label for="birthdate" class="form-label">Дата рождения<span
-                        class="text-muted"> (Опционально)</span></label>
-                <input type="date" class="form-control @error('birthdate') is-invalid @enderror" id="birthdate"
-                       name="birthdate"
-                       value="{{ old('birthdate') }}">
-                @error('birthdate')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
+                <div class="input-group-append">
+                    <span class="input-group-text show-hide-icon bg-body border-0 p-0" onclick="showHidePassword()">
+                        <i id="showHidePasswordIcon" class="bi bi-eye"></i>
+                    </span>
                 </div>
-                @enderror
             </div>
 
-            <div class="col-sm-6">
-                <label for="playerRole" class="form-label">Предпочитаемое амплуа<span
-                        class="text-muted"> (Опционально)</span></label>
-                <select class="form-select" id="playerRole" name="playerRole">
-                    <option value="">Выберите амплуа...</option>
-                    <option value="1" @if(old('playerRole') == 'Вратарь') selected @endif>Вратарь</option>
-                    <option value="2" @if(old('playerRole') == 'Защитник') selected @endif>Защитник</option>
-                    <option value="3" @if(old('playerRole') == 'Левый нападающий') selected @endif>Левый
-                        нападающий
-                    </option>
-                    <option value="4" @if(old('playerRole') == 'Правый нападающий') selected @endif>Правый
-                        нападающий
-                    </option>
-                    <option value="5" @if(old('playerRole') == 'Центральный нападающий') selected @endif>Центральный
-                        нападающий
-                    </option>
-                </select>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="hand" class="form-label">Хват клюшки<span
-                        class="text-muted"> (Опционально)</span></label>
-                <select class="form-select" id="hand" name="hand">
-                    <option value="">Выберите хват клюшки...</option>
-                    <option value="Left" @if(old('hand') == 'Левый') selected @endif>Левый</option>
-                    <option value="Right" @if(old('hand') == 'Правый') selected @endif>Правый</option>
-                </select>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="height" class="form-label">Рост, м<span class="text-muted"> (Опционально)</span></label>
-                <input type="number" class="form-control @error('height') is-invalid @enderror" id="height"
-                       name="height" value="{{ old('height') }}">
-                @error('height')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
+            <div class="input-group mt-2 user-select-none">
+                <div class="form-floating">
+                    <input type="password" name="password_confirmation"
+                           class="rounded form-control @error('password') is-invalid @enderror"
+                           id="password_confirmation" placeholder="Подтвердите пароль" style="margin-bottom: 0;">
+                    <label class="user-select-none text-secondary" for="password_confirmation">Подтвердите
+                        пароль</label>
                 </div>
-                @enderror
-            </div>
-
-            <div class="col-sm-6">
-                <label for="weight" class="form-label">Вес, кг<span class="text-muted"> (Опционально)</span></label>
-                <input type="number" class="form-control @error('weight') is-invalid @enderror" id="weight"
-                       name="weight" value="{{ old('weight') }}">
-                @error('weight')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
+                <div class="input-group-append">
+                                <span class="input-group-text show-hide-icon bg-body border-0 p-0"
+                                      onclick="showHidePassword()">
+                                    <i id="showHideConfirmedPasswordIcon" class="bi bi-eye"></i>
+                                </span>
                 </div>
-                @enderror
             </div>
 
-            <div class="col-12">
-                <label for="fileToUpload" class="form-label">Аватар пользователя<span
-                        class="text-muted"> (Опционально)</span></label>
-                <input type="file" accept=".jpg,.gif,.png"
-                       class="form-control @error('fileToUpload') is-invalid @enderror"
-                       name="fileToUpload" id="fileToUpload">
-                @error('fileToUpload')
-                <div class="alert alert-danger mt-1" role="alert">
-                    {{ $message }}
+            @error('password')
+            <div class="alert alert-danger mt-1" role="alert">
+                {{ $message }}
+            </div>
+            @enderror
+
+            <div class="d-grid gap-2 mt-2">
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Регистрация</button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <span>Есть аккаунт?</span>
+                    <a class="btn btn-link link-underline link-underline-opacity-0" href="{{ route('auth.create') }}">Вход</a>
                 </div>
-                @enderror
             </div>
-
-            <div class="col-12 mb-1">
-                <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Создать пользователя</button>
-            </div>
-
-        </div>
-    </form>
-
-    <a class="w-100 btn btn-link" href="{{ route('main') }}">Отмена регистрации</a>
-
-
-    <script>
-        $(document).ready(function () {
-            $('#phone').mask('000 000-0000');
-        });
-    </script>
+        </form>
+    </div>
+    </body>
 @endsection
