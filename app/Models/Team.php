@@ -15,4 +15,6 @@ class Team extends Model
         'description',
         'owner_id',
     ];
+
+    protected $dates = [ 'deleted_at' ];
 }
