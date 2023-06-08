@@ -24,8 +24,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => 'required|string|max:50|regex:/^[A-Za-z]+$/u',
-            'lastName' => 'required|string|max:50|regex:/^[A-Za-z]+$/u',
+            'firstName' => 'required|string|max:50', //regex:/^[A-Za-z]+$/u
+            'lastName' => 'required|string|max:50', //regex:/^[A-Za-z]+$/u
 //            'username' => 'required|string|min:2|max:25|regex:/^[a-z0-9_]+$/u|unique:users,username,NULL,deleted_at',
             'email' => 'required|string|email|unique:users,email,NULL,deleted_at',
             'password' => 'required|string|confirmed|min:8', // regex:/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/u

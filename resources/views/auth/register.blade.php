@@ -50,17 +50,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#firstName').focus(function () {
-                $('#firstNameHelp').show();
-            }).blur(function () {
-                $('#firstNameHelp').hide();
-            });
-
-            $('#lastName').focus(function () {
-                $('#lastNameHelp').show();
-            }).blur(function () {
-                $('#lastNameHelp').hide();
-            });
+            // $('#firstName').focus(function () {
+            //     $('#firstNameHelp').show();
+            // }).blur(function () {
+            //     $('#firstNameHelp').hide();
+            // });
+            //
+            // $('#lastName').focus(function () {
+            //     $('#lastNameHelp').show();
+            // }).blur(function () {
+            //     $('#lastNameHelp').hide();
+            // });
 
             $('#password').focus(function () {
                 $('#passwordHelp').show();
@@ -99,9 +99,9 @@
                 <input type="text" class="rounded form-control @error('firstName') is-invalid @enderror" id="firstName"
                        name="firstName" placeholder="Имя" value="{{ old('firstName') }}" pattern="[A-Za-z]+">
                 <label for="firstName" class="user-select-none text-secondary">Имя</label>
-                <div id="firstNameHelp" class="form-text" style="display: none;">Имя может содержать только буквы
-                    латинского алфавита (A–z)
-                </div>
+{{--                <div id="firstNameHelp" class="form-text" style="display: none;">Имя может содержать только буквы--}}
+{{--                    латинского алфавита (A–z)--}}
+{{--                </div>--}}
                 @error('firstName')
                 <div class="alert alert-danger mt-1" role="alert">
                     {{ $message }}
@@ -113,9 +113,9 @@
                 <input type="text" class="rounded form-control @error('lastName') is-invalid @enderror" id="lastName"
                        name="lastName" placeholder="Фамилия" value="{{ old('lastName') }}">
                 <label for="lastName" class="user-select-none text-secondary">Фамилия</label>
-                <div id="lastNameHelp" class="form-text" style="display: none;">Фамилия может содержать только буквы
-                    латинского алфавита (A–z)
-                </div>
+{{--                <div id="lastNameHelp" class="form-text" style="display: none;">Фамилия может содержать только буквы--}}
+{{--                    латинского алфавита (A–z)--}}
+{{--                </div>--}}
                 @error('lastName')
                 <div class="alert alert-danger mt-1" role="alert">
                     {{ $message }}
@@ -123,28 +123,28 @@
                 @enderror
             </div>
 
-            <script>
-                function restrictToAlphabetic(inputField) {
-                    inputField.addEventListener('keypress', function (event) {
-                        let keyCode = event.keyCode || event.which;
-                        let key = String.fromCharCode(keyCode);
+{{--            <script>--}}
+{{--                function restrictToAlphabetic(inputField) {--}}
+{{--                    inputField.addEventListener('keypress', function (event) {--}}
+{{--                        let keyCode = event.keyCode || event.which;--}}
+{{--                        let key = String.fromCharCode(keyCode);--}}
 
-                        let regex = /[A-Za-z]/;
+{{--                        let regex = /[A-Za-z]/;--}}
 
-                        if (!regex.test(key)) {
-                            event.preventDefault();
-                        }
-                    });
-                }
+{{--                        if (!regex.test(key)) {--}}
+{{--                            event.preventDefault();--}}
+{{--                        }--}}
+{{--                    });--}}
+{{--                }--}}
 
-                document.addEventListener('DOMContentLoaded', function () {
-                    let firstNameInput = document.getElementById('firstName');
-                    let lastNameInput = document.getElementById('lastName');
+{{--                document.addEventListener('DOMContentLoaded', function () {--}}
+{{--                    let firstNameInput = document.getElementById('firstName');--}}
+{{--                    let lastNameInput = document.getElementById('lastName');--}}
 
-                    restrictToAlphabetic(firstNameInput);
-                    restrictToAlphabetic(lastNameInput);
-                });
-            </script>
+{{--                    restrictToAlphabetic(firstNameInput);--}}
+{{--                    restrictToAlphabetic(lastNameInput);--}}
+{{--                });--}}
+{{--            </script>--}}
 
             <div class="form-floating mt-2 user-select-none">
                 <input type="email" class="rounded form-control @error('email') is-invalid @enderror" id="email"
