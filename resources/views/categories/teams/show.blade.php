@@ -92,7 +92,8 @@
                 </h2>
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <span>No data to display</span>
+                        <span>Основатель:</span> <a href="#"
+                                                    class="link-underline link-underline-opacity-0">{{ $team->owner->first_name . ' ' . $team->owner->last_name }}</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +124,8 @@
         </div>
         <div class="tab-pane fade" id="staff" role="tabpanel" aria-labelledby="staff-tab">
             <h3>Официальные лица команды</h3>
-            <span>No data to display</span>
+            <span>Основатель:</span> <a href="#"
+                                      class="link-underline link-underline-opacity-0">{{ $team->owner->first_name . ' ' . $team->owner->last_name }}</a>
         </div>
         <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
             <h3>Информация о команде</h3>
