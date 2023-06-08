@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeamRequest;
 use App\Models\Team;
+use App\Models\TeamLogo;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -46,10 +47,17 @@ class TeamController extends Controller
     public function store(TeamRequest $request)
     {
         try {
+            $path = $request->file('logo_file')->store('team_logos');
+
+            $team_logo = TeamLogo::create([
+                'path' => $path,
+            ]);
+
             $team = Team::create([
                 'name' => $request->name,
                 'description' => $request->description,
                 'owner_id' => Auth::id(),
+                'logo_id' => $team_logo->id,
             ]);
 
             return redirect()->route('teams.show', [$team]);

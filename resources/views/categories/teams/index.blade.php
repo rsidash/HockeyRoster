@@ -90,7 +90,7 @@
                 <div class="card border-0 m-2 text-center text-break" style="width: 12rem;">
                     <div class="d-flex justify-content-center">
                         <img
-                            src="https://sportishka.com/uploads/posts/2021-11/thumbs/1637358523_2-sportishka-com-p-khokkei-oboi-komandnii-sport-foto-2.jpg"
+                            src="{{ Storage::url($team->logo->path) }}"
                             class="object-fit-cover" alt="{{ $team->name }}"
                             style="height: 130px; width: 130px;border-radius: 100%;">
                     </div>
