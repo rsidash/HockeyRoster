@@ -128,7 +128,7 @@
                                         <span
                                             class="d-flex align-items-center fw-bold mx-2">{{ Auth::user()->email }}</span>
                                             <img
-                                                src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name . '+' . Auth::user()->last_name }}&rounded=true&background=random&size=32&bold=true"
+                                                src="https://ui-avatars.com/api/?name={{ Auth::user()->first_name . '+' . Auth::user()->last_name }}&rounded=true&background=0094fd&color=ffffff&size=32&bold=true"
                                                 alt="" width="32" height="32"
                                                 class="rounded-circle">
 {{--                                            @if (isset(Auth::user()->avatar_path))--}}
