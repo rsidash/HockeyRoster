@@ -47,12 +47,12 @@
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#staff"
+                            <button class="nav-link" id="staff-tab" data-bs-toggle="tab" data-bs-target="#staff"
                                     type="button" role="tab" aria-controls="staff" aria-selected="false">Персонал
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#about"
+                            <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
                                     type="button" role="tab" aria-controls="about" aria-selected="false">О команде
                             </button>
                         </li>
@@ -60,11 +60,9 @@
                 </div>
             </div>
             <div class="col-12 col-md-4 d-flex justify-content-end mb-2 mb-md-0">
-                @if($team->owner_id !== Auth::user()?->id)
-                    <div class="flex-grow-1 flex-md-grow-0">
-                        <a href="#" class="btn btn-primary w-100">Вступить</a>
-                    </div>
-                @endif
+                <div class="flex-grow-1 flex-md-grow-0">
+                    <a href="#" class="btn btn-primary w-100">Присоединиться</a>
+                </div>
             </div>
         </div>
 
@@ -125,7 +123,7 @@
         <div class="tab-pane fade" id="staff" role="tabpanel" aria-labelledby="staff-tab">
             <h3>Официальные лица команды</h3>
             <span>Основатель:</span> <a href="#"
-                                      class="link-underline link-underline-opacity-0">{{ $team->owner->first_name . ' ' . $team->owner->last_name }}</a>
+                                        class="link-underline link-underline-opacity-0">{{ $team->owner->first_name . ' ' . $team->owner->last_name }}</a>
         </div>
         <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
             <h3>Информация о команде</h3>
