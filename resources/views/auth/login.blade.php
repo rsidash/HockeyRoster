@@ -106,7 +106,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <a class="link-underline link-underline-opacity-0" href="{{ route('google.redirect') }}">
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Войти через
+                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" width="20px" height="20px" alt="google">Войти через
                         Google
                     </a>
                 </div>
