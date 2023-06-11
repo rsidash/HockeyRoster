@@ -9,7 +9,7 @@
         <div class="s-inner">
             <div class="s-inner__content">
                 <div class="s-title s-title--pointer">
-                    @if($team->owner_id === Auth::user()->id)
+                    @if($team->owner_id === Auth::user()?->id)
                         <div class="btn-group">
                             <button type="button"
                                     class="s-title s-title--pointer btn dropdown-toggle text-white border-0 p-0 m-0"
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-4 d-flex justify-content-end mb-2 mb-md-0">
-                @if($team->owner_id !== Auth::user()->id)
+                @if($team->owner_id !== Auth::user()?->id)
                     <div class="flex-grow-1 flex-md-grow-0">
                         <a href="#" class="btn btn-primary w-100">Вступить</a>
                     </div>
