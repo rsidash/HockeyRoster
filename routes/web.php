@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,4 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('players', TeamController::class)->only([
         'create', 'store',
     ]);
+
+    Route::get('/profile', [UserController::class, 'profile'])
+        ->name('users.profile');
 });
