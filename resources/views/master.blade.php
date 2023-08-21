@@ -66,7 +66,7 @@
                             aria-labelledby="dropdownUser">
                             <li><a class="dropdown-item" href="#">Сообщения<span
                                         class="badge bg-primary ms-1">4</span></a></li>
-                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                            <li><a class="dropdown-item" href="{{ route('settings.show') }}">Настройки</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -149,7 +149,7 @@
                                             aria-labelledby="dropdownUser" style="">
                                             <li><a class="dropdown-item" href="#">Сообщения<span
                                                         class="badge bg-primary ms-1">4</span></a></li>
-                                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('settings.show') }}">Настройки</a></li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>

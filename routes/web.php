@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,9 @@ Route::middleware('auth')->group(function () {
         'create', 'store',
     ]);
 
-    Route::get('/profile', [UserController::class, 'profile'])
-        ->name('users.profile');
+    Route::get('/settings', [SettingsController::class, 'show'])
+        ->name('settings.show');
+
+    Route::post('/settings', [SettingsController::class, 'store'])
+        ->name('settings.store');
 });

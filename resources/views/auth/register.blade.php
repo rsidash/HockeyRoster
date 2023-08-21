@@ -77,11 +77,12 @@
         <div class="mt-3">
             <div class="row">
                 <div class="col-md-12">
-                    <a class="d-flex justify-content-center align-items-center link-underline link-underline-opacity-0"
+                    <a class="btn btn-link d-flex justify-content-center align-items-center link-underline link-underline-opacity-0"
                        href="{{ route('google.redirect') }}">
-                        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="google">Зарегистрироваться
-                        с
-                        помощью Google
+                        <img
+                            src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 48 48'%3E%3Cdefs%3E%3Cpath id='a' d='M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z'/%3E%3C/defs%3E%3CclipPath id='b'%3E%3Cuse xlink:href='%23a' overflow='visible'/%3E%3C/clipPath%3E%3Cpath clip-path='url(%23b)' fill='%23FBBC05' d='M0 37V11l17 13z'/%3E%3Cpath clip-path='url(%23b)' fill='%23EA4335' d='M0 11l17 13 7-6.1L48 14V0H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%2334A853' d='M0 37l30-23 7.9 1L48 0v48H0z'/%3E%3Cpath clip-path='url(%23b)' fill='%234285F4' d='M48 48L17 24l-4-3 35-10z'/%3E%3C/svg%3E"
+                            alt="google" width="20px" height="20px" class="me-1">
+                        <span>Зарегистрироваться с помощью Google</span>
                     </a>
                 </div>
             </div>
@@ -99,9 +100,9 @@
                 <input type="text" class="rounded form-control @error('firstName') is-invalid @enderror" id="firstName"
                        name="firstName" placeholder="Имя" value="{{ old('firstName') }}" pattern="[A-Za-z]+">
                 <label for="firstName" class="user-select-none text-secondary">Имя</label>
-{{--                <div id="firstNameHelp" class="form-text" style="display: none;">Имя может содержать только буквы--}}
-{{--                    латинского алфавита (A–z)--}}
-{{--                </div>--}}
+                {{--                <div id="firstNameHelp" class="form-text" style="display: none;">Имя может содержать только буквы--}}
+                {{--                    латинского алфавита (A–z)--}}
+                {{--                </div>--}}
                 @error('firstName')
                 <div class="alert alert-danger mt-1" role="alert">
                     {{ $message }}
@@ -113,9 +114,9 @@
                 <input type="text" class="rounded form-control @error('lastName') is-invalid @enderror" id="lastName"
                        name="lastName" placeholder="Фамилия" value="{{ old('lastName') }}">
                 <label for="lastName" class="user-select-none text-secondary">Фамилия</label>
-{{--                <div id="lastNameHelp" class="form-text" style="display: none;">Фамилия может содержать только буквы--}}
-{{--                    латинского алфавита (A–z)--}}
-{{--                </div>--}}
+                {{--                <div id="lastNameHelp" class="form-text" style="display: none;">Фамилия может содержать только буквы--}}
+                {{--                    латинского алфавита (A–z)--}}
+                {{--                </div>--}}
                 @error('lastName')
                 <div class="alert alert-danger mt-1" role="alert">
                     {{ $message }}
@@ -123,28 +124,28 @@
                 @enderror
             </div>
 
-{{--            <script>--}}
-{{--                function restrictToAlphabetic(inputField) {--}}
-{{--                    inputField.addEventListener('keypress', function (event) {--}}
-{{--                        let keyCode = event.keyCode || event.which;--}}
-{{--                        let key = String.fromCharCode(keyCode);--}}
+            {{--            <script>--}}
+            {{--                function restrictToAlphabetic(inputField) {--}}
+            {{--                    inputField.addEventListener('keypress', function (event) {--}}
+            {{--                        let keyCode = event.keyCode || event.which;--}}
+            {{--                        let key = String.fromCharCode(keyCode);--}}
 
-{{--                        let regex = /[A-Za-z]/;--}}
+            {{--                        let regex = /[A-Za-z]/;--}}
 
-{{--                        if (!regex.test(key)) {--}}
-{{--                            event.preventDefault();--}}
-{{--                        }--}}
-{{--                    });--}}
-{{--                }--}}
+            {{--                        if (!regex.test(key)) {--}}
+            {{--                            event.preventDefault();--}}
+            {{--                        }--}}
+            {{--                    });--}}
+            {{--                }--}}
 
-{{--                document.addEventListener('DOMContentLoaded', function () {--}}
-{{--                    let firstNameInput = document.getElementById('firstName');--}}
-{{--                    let lastNameInput = document.getElementById('lastName');--}}
+            {{--                document.addEventListener('DOMContentLoaded', function () {--}}
+            {{--                    let firstNameInput = document.getElementById('firstName');--}}
+            {{--                    let lastNameInput = document.getElementById('lastName');--}}
 
-{{--                    restrictToAlphabetic(firstNameInput);--}}
-{{--                    restrictToAlphabetic(lastNameInput);--}}
-{{--                });--}}
-{{--            </script>--}}
+            {{--                    restrictToAlphabetic(firstNameInput);--}}
+            {{--                    restrictToAlphabetic(lastNameInput);--}}
+            {{--                });--}}
+            {{--            </script>--}}
 
             <div class="form-floating mt-2 user-select-none">
                 <input type="email" class="rounded form-control @error('email') is-invalid @enderror" id="email"

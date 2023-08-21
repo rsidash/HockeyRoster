@@ -48,4 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $dates = [ 'deleted_at' ];
+
+    public function player()
+    {
+        return $this->belongsTo(Player::class);
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
 }
